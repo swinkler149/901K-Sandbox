@@ -1,6 +1,16 @@
-extends layout
+head
 
-block content
-  h1= title
-  p Welcome to #{title}
+  script(src='http://js.arcgis.com/3.13/')
+  script(src='esri.js')
+
+  link(rel='stylesheet' href='http://js.arcgis.com/3.13/esri/css/esri.css')
+
+  style 
+    include map.css
+
+body
+
+  title= title
+  p Welcome to stuff
   p This is where the rest of the application will go
+  div(id='mapDiv' width='300')
