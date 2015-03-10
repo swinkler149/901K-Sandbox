@@ -4,4 +4,4 @@ The Coorelator assists customers with discovery of U.S. communities through a mi
 
 The following functionality has been developed:
 
-Ability to drill down in a geo-region.  A user can zoom in and zoom out.
+-  Ability to drill down in a geo-region.  A user can zoom in and zoom out.
