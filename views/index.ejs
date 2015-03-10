@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title><%= title %></title>
 
-<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css">
+<link rel="stylesheet" href="/stylesheets/style.css"/>
+<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
 <script src="http://js.arcgis.com/3.13/"></script>
-<script>
-  require(["esri/map", "dojo/domReady!"], function(Map) {
-    // code to create the map and add a basemap will go here
-  });
-</script>
 <script>
 require(["esri/map", "dojo/domReady!"], function(Map) {
   map = new Map("mapDiv", {
@@ -29,6 +25,8 @@ require(["esri/map", "dojo/domReady!"], function(Map) {
 </style>
 </head>
 <body class="claro">
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
 <table border="0" cellpadding="30" width="500">
 <tr><td>
   <div id="mapDiv" width="300"></div>
