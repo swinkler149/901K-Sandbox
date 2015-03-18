@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/> 
+<script src="http://js.arcgis.com/3.13/"></script> 
+<script> 
+  require(["esri/map", "dojo/domReady!"], function(Map) { 
+    map = new Map("mapDiv", { 
+      center: [-95.049, 39.285], 
+      zoom: 3, 
+      basemap: "streets" 
+    }); 
+  }); 
+</script> 
+<p>This is the map view.</p>
+<div id="mapDiv" width="300"></div>
