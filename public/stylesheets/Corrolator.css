@@ -2,6 +2,8 @@
     background-color:#fff;
     overflow-x:hidden;
     font-family:Calibri;
+    padding:0;
+    margin:0;
 }
 
 .container {
@@ -29,7 +31,6 @@
 
 .map-col {
     padding:15px;
-    background-image:url('http://www.dakota-truck.net/MAP/usa.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     min-height:700px;

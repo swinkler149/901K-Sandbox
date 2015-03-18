@@ -2,36 +2,89 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <title><%= title %></title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/stylesheets/Corrolator.css" />
+    
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="/stylesheets/style.css"/>
-<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
-<script src="http://js.arcgis.com/3.13/"></script>
-<script>
-require(["esri/map", "dojo/domReady!"], function(Map) {
-  map = new Map("mapDiv", {
-    center: [-95.049, 39.285],
-    zoom: 3,
-    basemap: "streets"
-  });
-});
-</script>
-<style>
-  html, body, #mapDiv {
-    padding: 10;
-    margin: 10;
-  }
-</style>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
+    <script src="http://js.arcgis.com/3.13/"></script>
+  <script>
+    require(["esri/map", "dojo/domReady!"], function(Map) {
+      map = new Map("mapDiv", {
+        center: [-95.049, 39.285],
+        zoom: 3,
+        basemap: "streets"
+      });
+    });
+  </script>
 </head>
-<body class="claro">
-<h1><%= title %></h1>
+<body>
+
+<!--
 <p>Welcome to <%= title %></p>
 <table border="0" cellpadding="30" width="500">
 <tr><td>
   <div id="mapDiv" width="300"></div>
 </td></tr>
 </table>
+-->
+
+
+  <div class="container-fluid">
+      <div class="row header-row">
+          <div class="col-sm-12">
+              <img src="/images/logo.PNG" />
+              <img src="/images/quesito.png" class="pull-right" style="width:30px;" />
+          </div>
+      </div>
+  
+      <div class="row main-row">
+      
+          <!-- MAP VIEWER -->
+          <div id="mapDiv" class="col-sm-10 map-col">
+          </div>
+          
+          <!-- CRITERIA FILTERS -->
+          <div class="col-sm-2 selector-col">
+          
+              <!-- STATES FILTER -->
+              <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="width:100%;">
+                      States
+                      <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width:100%;">
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Virginia</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Maryland</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">DC</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">More...</a></li>
+                  </ul>
+              </div>
+              
+          </div>
+          
+      </div>
+  
+      <div class="row footer-row">
+          <div class="col-sm-12">
+              <p>INTEGRITYOne Partners |
+              <a href="http://www.ionep.com">www.ionep.com</a> |
+              <a href="http://twitter.com/integrity_one">Follow us on twitter! <img src="http://upload.wikimedia.org/wikipedia/en/9/9f/Twitter_bird_logo_2012.svg" width="20px" /></a></p>
+          </div>
+      </div>
+  </div>
+
+
+
 </body>
 
 </html>
