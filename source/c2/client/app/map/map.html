@@ -1,13 +1,50 @@
-<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/> 
-<script src="http://js.arcgis.com/3.13/"></script> 
-<script> 
-  require(["esri/map", "dojo/domReady!"], function(Map) { 
-    map = new Map("mapDiv", { 
-      center: [-95.049, 39.285], 
-      zoom: 3, 
-      basemap: "streets" 
-    }); 
-  }); 
-</script> 
-<p>This is the map view.</p>
-<div id="mapDiv" width="300"></div>
+<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
+<script src="http://js.arcgis.com/3.13/"></script>
+<script>
+  require(["esri/map", "dojo/domReady!"], function(Map) {
+    map = new Map("mapDiv", {
+      center: [-95.049, 39.285],
+      zoom: 3,
+      basemap: "streets"
+    });
+  });
+</script>
+<div ng-include="'components/navbar/navbar.html'"></div>
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Welcome to Correlator</h1>
+    <p class="lead">A Revolutionary way to Visualize Public Domain Data</p>
+    <!--<img src="assets/images/yeoman.png" alt="I'm Yeoman">-->
+    <p>This is the map view, by {{myName}}.</p>
+    <div id="mapDiv" width="300"></div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Features:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
+        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <form class="thing-form">
+    <label>Form with sample angular activities<label>
+    <p class="input-group">
+      <input type="text" class="form-control" placeholder="Input something" ng-model="newThing">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New Thing</button>
+      </span>
+    </p>
+  </form>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <p>Footer goes here   |
+        <a href="http://www.ionep.com">About IOP</a> |
+         <a href="https://github.com/swinkler149/901K-Sandbox/issues?state=open">Issues</a></p>
+  </div>
+</footer>
