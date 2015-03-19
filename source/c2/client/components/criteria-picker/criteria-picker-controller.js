@@ -2,17 +2,15 @@
 
 angular.module('c2App')
   .controller('CriteriaPickerCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    },{
-      'title': 'Map',
-      'link': '/map'
-    }];
+    
+    //fill these up with data from server
+    $scope.employmentTypeData = [];
+    $scope.agriculturalClassData = [];
 
-    $scope.isCollapsed = true;
-
-    $scope.isActive = function(route) {
-      return route === $location.path();
+    $scope.correlate = function() {
+      //using criteria picker inputs
+      //get data
+      //perform correlations
+      //present data
     };
   });
