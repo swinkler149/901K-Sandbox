@@ -1,20 +1,12 @@
 Vision: Relate Unrelated Things
 
-The Corrolator assists customers with discovery of U.S. communities through a mixing and combining of government data.  A visualization capability that enables users to discover a variety of information about a region, or the inverse, to identify a region based on various data criteria provided.  The Corrolator is a web-based capability that leverages a plethora of government data and APIs and enables users to specify criteria (geographic area or mix of data specifications) and discover the geographic area(s) that match or information about a specified geographic area queried.    
+The Corrolator allows a user to make associations between US population, employment, wage, and agriculture data.  The user will have the ability to enter a query criteria with results displayed in a geospatial interface.
 
-Features:
-- Analyze Data
-- Drill Down from Top Level
-- Data Options
-- Immigration Statistics
-- By Geographical Region
-- Population Estimates
-- Visualization of Multiple Data Searches
-- Timelines
-- Charts
-- Geographical
-- Employee Statistics
-- Agriculture Statistics
+Data Sources:
+Census Bureau - U.S. Population and Demographic data (via API)
+Department of Homeland Security - Immigration data from 1996 through 2013  (The Yearbook of Immigration Statistics)
+Department of Labor - Employment and Wage Estimates for over 800 occupations from 1996 through 2013 (The Occupational Employment Statistics)
+Department of Agriculture - Agricultural data
 
 The following functionality has been developed:
 
