@@ -20,21 +20,7 @@
         
         <!-- CRITERIA FILTERS -->
         <div class="col-sm-2 selector-col">
-        
-            <!-- STATES FILTER. -->
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="width:100%;">
-                    States
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="width:100%;">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Virginia</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Maryland</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">DC</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">More...</a></li>
-                </ul>
-            </div>
-            
+            <div ng-include="'components/criteria-picker/criteria-picker.html'"></div>
         </div>
         
     </div>
