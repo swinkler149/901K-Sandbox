@@ -5,6 +5,9 @@ angular.module('c2App')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'Map',
+      'link': '/map'
     }];
 
     $scope.isCollapsed = true;
