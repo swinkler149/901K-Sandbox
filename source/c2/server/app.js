@@ -1,5 +1,6 @@
 /**
  * Main application file
+ * ---This is a test comment to verify git pull automation---
  */
 
 'use strict';
