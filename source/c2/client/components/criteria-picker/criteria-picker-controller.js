@@ -10,7 +10,7 @@ angular.module('c2App')
     $scope.correlate = function() {
       //using criteria picker inputs
       //get data
-      //perform correlations
-      //present data
+      //perform correlations on data
+      //present results
     };
   });
