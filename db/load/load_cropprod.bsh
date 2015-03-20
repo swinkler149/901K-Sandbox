@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "Loading crop production data"
 
-DBUSER="swinkler"
-DBPW="swd56789"
+DBUSER="dbuser"
+DBPW="dbuserpw"
 INPUTDATA="./cropprod.json"
 DBNAME="correlatordb"
 COLLECTION="cropprod2012"
