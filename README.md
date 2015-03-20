@@ -13,8 +13,8 @@ Over the past few years most government entities (state, local, federal, foreign
 
 ####Requirements
 
-The full list of functionality that will be developed can be viewed in the [Product Backlog] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/Product%20Backlog.jpg).  The funtionality that has been built to date are refernced in the [User Stories] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/User%20Stories.jpg).
+The full list of functionality that will be developed can be viewed in the [Product Backlog] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/Product%20Backlog.jpg).  The funtionality that has been developed to date is referenced in the [User Stories] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/User%20Stories.jpg).
 
 ####Testing
 
-All [Test Cases] (https://github.com/swinkler149/901K-Sandbox/tree/master/Testing) are linked to the User Stories.
+All [Test Cases] (https://github.com/swinkler149/901K-Sandbox/tree/master/Testing) is linked to the User Stories.
