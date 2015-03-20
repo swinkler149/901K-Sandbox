@@ -13,4 +13,6 @@ The Corrolator allows a user to make associations between US population, employm
 
 ####Requirements:
 
-The Program's Feature List are documented in the [Product Backlog] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/Product%20Backlog.jpg)
+The full list of functionality that will be developed can be viewed in the [Product Backlog] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/Product%20Backlog.jpg)
+
+The funtionality that has been built to date are refernced in the [User Stories] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/User%20Stories.jpg)
