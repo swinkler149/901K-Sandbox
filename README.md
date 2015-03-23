@@ -1,21 +1,20 @@
-Vision: Relate Unrelated Things
+##THE CORROLATOR
 
-The Coorolator assists customers with discovery of U.S. communities through a mixing and combining of government data.  A visualization capability that enables users to discover a variety of information about a region, or the inverse, to identify a region based on various data criteria provided.  The Coorolator is a web-based capability that leverages a plethora of government data and APIs and enables users to specify criteria (geographic area or mix of data specifications) and discover the geographic area(s) that match or information about a specified geographic area queried.    
+####Vision `Relate Unrelated Things`
 
-Features:
-- Analyze Data
-- Drill Down from Top Level
-- Data Options
-- Immigration Statistics
-- By Geographical Region
-- Population Estimates
-- Visualization of Multiple Data Searches
-- Timelines
-- Charts
-- Geographical
-- Employee Statistics
-- Agriculture Statistics
+Over the past few years most government entities (state, local, federal, foreign) have begun embracing open data and are increasingly releasing datasets publicly. This movement has vastly increased the amount of data available, but existing applications seem to be designed mainly to view and access individual datasets one at a time.  This restriction contradicts the notion that, ultimately, everything is related to everything else.  `The Corrolator` allows a user to make associations between US population, employment, wage, and agriculture data.  The user will have the ability to enter a query criteria with results displayed in a geospatial interface.
 
-The following functionality has been developed:
+####Data Sources
 
--  Ability to drill down in a geo-region.  A user can zoom in and zoom out.
+1. Census Bureau: U.S. Population and Demographic data (via API)
+2. Department of Homeland Security: Immigration data from 1996 through 2013  (The Yearbook of Immigration Statistics)
+3. Department of Labor: Employment and Wage Estimates for over 800 occupations from 1996 through 2013 (The Occupational Employment Statistics)
+4. Department of Agriculture: Agriculture data
+
+####Requirements
+
+The full list of functionality that will be developed can be viewed in the [Product Backlog] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/Product%20Backlog.jpg).  The funtionality that has been developed to date is referenced in the [User Stories] (https://github.com/swinkler149/901K-Sandbox/blob/master/Product/User%20Stories.jpg).
+
+####Testing
+
+All [Test Cases] (https://github.com/swinkler149/901K-Sandbox/tree/master/Testing) is linked to the User Stories.  Testing was conducted using ..........

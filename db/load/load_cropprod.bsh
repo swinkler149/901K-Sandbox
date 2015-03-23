@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "Loading crop production data"
+
+DBUSER="dbuser"
+DBPW="dbuserpw"
+INPUTDATA="./cropprod.json"
+DBNAME="correlatordb"
+COLLECTION="cropprod2012"
+
+cat $INPUTDATA | mongoimport -u $DBUSER -p $DBPW -d $DBNAME -c $COLLECTION 
+
+if test $? -eq 0
+then
+   echo "Mongo Import successful"
+else
+   echo "Mongo Import failed"
+fi
