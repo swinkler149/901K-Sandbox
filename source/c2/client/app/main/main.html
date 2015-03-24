@@ -3,36 +3,46 @@
 <header class="hero-unit" id="banner">
   <div class="container">
     <h1>Welcome to Correlator</h1>
-    <p class="lead">Base Application Generated with Yeoman Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+    <p class="lead">Relating Unrelated Things Since 2015</p>
+    <img class='img-rounded' src="assets/images/logo.PNG" alt="Correlator" width=150px>
   </div>
 </header>
 
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
+  <div class='row' style='padding-bottom:15px;'>
+    <div class='col-lg-12'>
+      <h1 class='page-header'>Vision</h1>
+      <p class='text-justify'>Over the past few years most government entities (state, local, federal, foreign) have begun embracing open data and are increasingly releasing datasets publicly. This movement has vastly increased the amount of data available, but existing applications seem to be designed mainly to view and access individual datasets one at a time. This restriction contradicts the notion that, ultimately, everything is related to everything else. The Corrolator allows a user to make associations between US population, employment, wage, and agriculture data. The user will have the ability to enter a query criteria with results displayed in a geospatial interface.</p>
     </div>
   </div>
 
-  <form class="thing-form">
-    <label>Form with sample angular activities<label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Input something" ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New Thing</button>
-      </span>
-    </p>
-  </form>
+  <div class='row' style='padding-bottom:35px;'>
+    <div class="col-lg-12">
+      <h1 class="page-header">Features</h1>
+      <div class='col-lg-4'>
+          <h3><span class='glyphicon glyphicon-globe'></span> Data Mining</h3>
+          <p class='text-justify'>You can use this to mine data, relate properties of seemingly unrelated objects to find useful info</p>
+      </div>
+      <div class='col-lg-4'>
+          <h3><span class='glyphicon glyphicon-open'></span> Open Source</h3>
+          <p>You can find this project on Github. Don't forget to Star us on Github</p>
+      </div>
+      <div class='col-lg-4'>
+          <h3><span class='glyphicon glyphicon-fire'></span> MEAN</h3>
+          <p>This is a full-stack JavaScript project that uses the MEAN framework</p>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-lg-12'>
+      <h1 class='page-header'>Data Sources</h1>
+	<ul class='list-group'><li class='list-group-item'>Census Bureau: U.S. Population and Demographic data (via API)</li>
+	<li class='list-group-item'>Department of Homeland Security: Immigration data from 1996 through 2013 (The Yearbook of Immigration Statistics)</li>
+	<li class='list-group-item'>Department of Labor: Employment and Wage Estimates for over 800 occupations from 1996 through 2013 (The Occupational Employment Statistics)</li>
+	<li class='list-group-item'>Department of Agriculture: Agriculture data</li></ul>
+    </div>
+  </div>
 </div>
 
-<footer class="footer">
-  <div class="container">
-      <p>Footer goes here   |
-        <a href="http://www.ionep.com">About IOP</a> |
-         <a href="https://github.com/swinkler149/901K-Sandbox/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+<div ng-include="'components/footer/footer.html'"></div>
