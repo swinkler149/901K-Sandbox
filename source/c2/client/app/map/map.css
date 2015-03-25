@@ -54,7 +54,7 @@ body {
     border-bottom-left-radius:0px;
 }
 
-.selector-col .dropdown {
+.selector-col select {
     margin-bottom:10px;
 }
 
