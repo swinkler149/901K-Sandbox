@@ -6,8 +6,8 @@
             Select Employment Type
             <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu employment-menu-items" role="menu" aria-labelledby="ddl-employment" style="width:100%;">
-            <li ng-repeat="item in employmentTypeData">
+        <ul class="dropdown-menu employment-menu-items" role="menu" aria-labelledby="ddl-employment" style="width:100%;" ng-repeat="item in employmentTypeData">
+            <li>
                 {{item.title}}
             </li>
         </ul>
@@ -21,11 +21,10 @@
         </button>
         <ul class="dropdown-menu agricultural-menu-items" role="menu" aria-labelledby="ddl-agricultural" style="width:100%;">
             <li ng-repeat="item in agriculturalClassData">
-                {{item.title}}
+                {{item.Commodity}}
             </li>
         </ul>
     </div>
     
     <button class='btn btn-primary' type='button' ng-click='correlate()'>Correlate</button>
-    
 </div>

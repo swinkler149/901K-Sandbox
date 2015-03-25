@@ -24,6 +24,9 @@
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/map/map.css">
       <link rel="stylesheet" href="components/modal/modal.css">
+      <!-- Load Leaflet from CDN-->
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css" />
+      <link rel="stylesheet" type="text/css" href="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/1.0.0-rc.4/esri-leaflet-geocoder.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
@@ -76,7 +79,19 @@
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <script src="components/socket/socket.service.js"></script>
-          <!-- endinjector -->
+          
+          <!-- Load Leaflet from CDN--> 
+          <script src="//cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js"></script>
+          <!-- Load Esri Leaflet from CDN -->
+          <script src="//cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+          <!-- Include Leaflet.heat via rawgit.com, do not use in production -->
+          <!--<script src="https://rawgit.com/Leaflet/Leaflet.heat/gh-pages/dist/leaflet-heat.js"></script>-->
+
+          <!-- Load Heatmap Feature Layer from CDN -->
+          <!--<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-heatmap-feature-layer/1.0.0-rc.1/esri-leaflet-heatmap-feature-layer.js"></script>-->
+          <!-- Geocoding Services -->
+          <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/1.0.0-rc.4/esri-leaflet-geocoder.js"></script>
+    <!-- endinjector -->
         <!-- endbuild -->
 </body>
 </html>

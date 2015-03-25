@@ -1,44 +1,88 @@
-<!-- Load Leaflet from CDN-->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css" />
-<script src="//cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js"></script>
+<style>
+  #selectedFeatures {
+    position: absolute;
+    top: 100px;
+    right: 280px;
+    z-index: 10;
+    background: white;
+    padding: 1em;
+  }
+</style>
 
-<!-- Load Esri Leaflet from CDN -->
-<script src="//cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.6/esri-leaflet.js"></script>
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container-fluid">
+    <div class="row main-row">
+        <!-- MAP VIEWER -->
+        <div id="map" class="col-sm-10 map-col">
+        </div>
+        <div id="selectedFeatures" class="leaflet-bar">No Features Selected</div>
 
-<!-- Include Leaflet.heat via rawgit.com, do not use in production -->
-<!--<script src="https://rawgit.com/Leaflet/Leaflet.heat/gh-pages/dist/leaflet-heat.js"></script>-->
+        <!-- CRITERIA FILTERS -->
+        <div class="col-sm-2 selector-col">
+            <div ng-include="'components/criteria-picker/criteria-picker.html'"></div>
+        </div>
 
-<!-- Load Heatmap Feature Layer from CDN -->
-<!--<script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet-heatmap-feature-layer/1.0.0-rc.1/esri-leaflet-heatmap-feature-layer.js"></script>-->
-
+    </div>
+</div>
 <script>
-  var map;
+  // Needed for waiting for libs to load
+  function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+  }
+
+  /*function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
+  }
+  function onEachFeature(feature, layer) {
+    layer.on({
+      click: zoomToFeature
+    });
+  }*/
+
   var identifiedFeature;
   var pane;
   var states;
+  var map;
 
   // Workaround...
   var setint = setInterval(function() {
 
-    if(require !== undefined)
+    if(typeof require != undefined && typeof L.esri != undefined)
     {
       clearInterval(setint);
 
-      //var map = L.map('map').setView([45.526, -122.667], 13);
       map = L.map('map').setView([37.78, -92.85], 4); // All of US
       L.esri.basemapLayer('Streets').addTo(map);
-      //L.esri.featureLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0').addTo(map);
-      //L.esri.featureLayer('https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0').addTo(map);
-//L.esri.heatmapFeatureLayer('https://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/Heritage_Trees_Portland/FeatureServer/0', {
- //   radius: 12
- // }).addTo(map);
-      states = L.esri.dynamicMapLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer', {
+      console.log('Successfully loaded map!');
+      /*states = L.esri.featureLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0', {
         opacity: 0.5,
         useCors: false
-      }).addTo(map);
+      }).addTo(map);*/
    
-      pane = document.getElementById('selectedFeatures'); 
-      map.on('click', function (e) {
+      // Auto-zoom on load
+      /*L.esri.Geocoding.geocode().text('Virginia').run(function (error, response) {
+          map.fitBounds(response.results[0].bounds);
+      });*/
+      
+      var searchControl = new L.esri.Geocoding.Controls.Geosearch().addTo(map);
+      var results = new L.LayerGroup().addTo(map);
+      searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+          results.addLayer(L.marker(data.results[i].latlng));
+        }
+      });
+
+      pane = document.getElementById('selectedFeatures');
+      /*L.geoJson(states, {
+        onEachFeature: onEachFeature
+      }).addTo(map);*/
+      /*map.on('click', function (e) {
         if(identifiedFeature){
           map.removeLayer(identifiedFeature);
           pane.innerHTML = 'Loading';
@@ -54,42 +98,9 @@
           }).addTo(map);
           pane.innerHTML = featureCollection.features[0].properties.NAME;
         });
-      });
-    }
+      });*/
+    }  
   },500);
 </script>
-<style>
-  #selectedFeatures {
-    position: absolute;
-    top: 100px;
-    right: 280px;
-    z-index: 10;
-    background: white;
-    padding: 1em;
-  }
-</style>
-
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<div class="container-fluid">
-    <div class="row main-row">
-    
-        <!-- MAP VIEWER -->
-        <div id="map" class="col-sm-10 map-col">
-        </div>
-        <div id="selectedFeatures" class="leaflet-bar">No Features Selected</div>
-
-        <!-- CRITERIA FILTERS -->
-        <div class="col-sm-2 selector-col">
-            <div ng-include="'components/criteria-picker/criteria-picker.html'"></div>
-        </div>
-        
-    </div>
-</div>
-
 
 <div ng-include="'components/footer/footer.html'"></div>
-
-<link rel="stylesheet" href="http://js.arcgis.com/3.13/esri/css/esri.css"/>
-<script src="http://js.arcgis.com/3.13/"></script>
-
