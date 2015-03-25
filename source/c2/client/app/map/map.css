@@ -7,6 +7,10 @@ body {
     background-color:rgba(210, 223, 209, 0.82);
 }
 
+.navbar {
+  margin-bottom:0;
+}
+
 .container-fluid {
     background-color:#fff;
 }
@@ -48,6 +52,14 @@ body {
     border-radius:20px;
     border-top-left-radius:0px;
     border-bottom-left-radius:0px;
+}
+
+.selector-col .dropdown {
+    margin-bottom:10px;
+}
+
+.btn-correlate {
+    
 }
 
 .footer-row {
