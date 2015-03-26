@@ -1,11 +1,11 @@
 #!/bin/bash
-echo "Loading crop production data"
+echo "Loading OES by state data"
 
-DBUSER="swinkler"
-DBPW="swd56789"
+DBUSER="dbuser"
+DBPW="dbuserpw"
 INPUTDATA="./oes2013bystate.json"
 DBNAME="correlatordb"
-COLLECTION="oes2013bystate"
+COLLECTION="oesbystate"
 
 cat $INPUTDATA | mongoimport -u $DBUSER -p $DBPW -d $DBNAME -c $COLLECTION 
 

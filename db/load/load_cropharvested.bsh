@@ -1,11 +1,11 @@
 #!/bin/bash
-echo "Loading crop production data"
+echo "Loading crop harvested data"
 
-DBUSER="swinkler"
-DBPW="swd56789"
+DBUSER="dbuser"
+DBPW="dbuserpw"
 INPUTDATA="./CropsAcresHarvestedByState2012.json"
 DBNAME="correlatordb"
-COLLECTION="cropharvested2012"
+COLLECTION="cropharvested"
 
 cat $INPUTDATA | mongoimport -u $DBUSER -p $DBPW -d $DBNAME -c $COLLECTION 
 
