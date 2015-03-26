@@ -11,10 +11,12 @@ exports.index = function(req, res) {
     console.log('there are %d records', count);
   });
 
-  Cropprod.find({ "State" : "FLORIDA" }, 'Year State Commodity', function (err, cropprods) {
+  //Cropprod.find({ "State" : "FLORIDA" }, 'Year State Commodity', function (err, cropprods) {
+  Cropprod.distinct( 'Commodity', null, function (err, cropprods) {
     if (err) return handleError(err);
     // Continue if there are no errors...
-    console.log('Retrieved some records!') // Space Ghost is a talk show host.
+    //assert(Array.isArray(cropprods));
+    console.log('Retrieved some records:\n', cropprods);
     return res.json(200, cropprods);
   });
 
