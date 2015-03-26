@@ -25,24 +25,21 @@
     </div>
 </div>
 <script>
-  // Needed for waiting for libs to load
-  function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
-    }
-  }
-
-  /*function zoomToFeature(e) {
+  function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
   }
   function onEachFeature(feature, layer) {
     layer.on({
       click: zoomToFeature
     });
-  }*/
+  }
+  var popup = L.popup();
+  function onMapClick(e) {
+      popup
+          .setLatLng(e.latlng)
+          .setContent("You clicked the map at " + e.latlng.toString())
+          .openOn(map);
+  }
 
   var identifiedFeature;
   var pane;
@@ -52,17 +49,20 @@
   // Workaround...
   var setint = setInterval(function() {
 
-    if(typeof require != undefined && typeof L.esri != undefined)
+    if(typeof require != undefined) // && typeof L.esri != undefined && typeof L.esri.Geocoding != undefined) 
     {
       clearInterval(setint);
 
       map = L.map('map').setView([37.78, -92.85], 4); // All of US
+      map.on('click', onMapClick);
+
       L.esri.basemapLayer('Streets').addTo(map);
       console.log('Successfully loaded map!');
-      /*states = L.esri.featureLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0', {
+      //states = L.esri.featureLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0', {
+      states = L.esri.dynamicMapLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer', {
         opacity: 0.5,
         useCors: false
-      }).addTo(map);*/
+      }).addTo(map);
    
       // Auto-zoom on load
       /*L.esri.Geocoding.geocode().text('Virginia').run(function (error, response) {
@@ -78,11 +78,8 @@
         }
       });
 
-      pane = document.getElementById('selectedFeatures');
-      /*L.geoJson(states, {
-        onEachFeature: onEachFeature
-      }).addTo(map);*/
-      /*map.on('click', function (e) {
+      /*pane = document.getElementById('selectedFeatures');
+        map.on('click', function (e) {
         if(identifiedFeature){
           map.removeLayer(identifiedFeature);
           pane.innerHTML = 'Loading';
@@ -96,7 +93,8 @@
               };
             }
           }).addTo(map);
-          pane.innerHTML = featureCollection.features[0].properties.NAME;
+          pane.innerHTML = identifiedFeature.properties.NAME;
+          map.fitBounds(identifiedFeature.bounds);
         });
       });*/
     }  
