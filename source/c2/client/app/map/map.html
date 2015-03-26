@@ -15,7 +15,7 @@
         <!-- MAP VIEWER -->
         <div id="map" class="col-sm-10 map-col">
         </div>
-        <div id="selectedFeatures" class="leaflet-bar">No Features Selected</div>
+        <div id="selectedFeatures" class="leaflet-bar">No State Selected</div>
 
         <!-- CRITERIA FILTERS -->
         <div class="col-sm-2 selector-col">
@@ -54,12 +54,14 @@
       clearInterval(setint);
 
       map = L.map('map').setView([37.78, -92.85], 4); // All of US
-      map.on('click', onMapClick);
+      //map.on('click', onMapClick);
 
       L.esri.basemapLayer('Streets').addTo(map);
       console.log('Successfully loaded map!');
       //states = L.esri.featureLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0', {
-      states = L.esri.dynamicMapLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer', {
+      //states = L.esri.dynamicMapLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer', {   
+      states = L.esri.dynamicMapLayer('http://sampleserver5.arcgisonline.com/arcgis/rest/services/USA/MapServer', {
+        layers: [2],
         opacity: 0.5,
         useCors: false
       }).addTo(map);
@@ -78,25 +80,45 @@
         }
       });
 
-      /*pane = document.getElementById('selectedFeatures');
-        map.on('click', function (e) {
+      pane = document.getElementById('selectedFeatures');
+      map.on('click', function (e) {
         if(identifiedFeature){
           map.removeLayer(identifiedFeature);
-          pane.innerHTML = 'Loading';
+          pane.innerHTML = 'Loading...';
         }
         states.identify().on(map).at(e.latlng).run(function(error, featureCollection){
-          identifiedFeature = new L.GeoJSON(featureCollection.features[0], {
+          /*identifiedFeature = new L.GeoJSON(featureCollection.features[0], {
             style: function(){
               return {
                 color: '#5C7DB8',
                 weight: 2
               };
             }
-          }).addTo(map);
-          pane.innerHTML = identifiedFeature.properties.NAME;
-          map.fitBounds(identifiedFeature.bounds);
+          }).addTo(map);*/
+          pane.innerHTML = 'Selected State: <b>' + featureCollection.features[0].properties.STATE_NAME + '</b>';
+          //map.fitBounds(featureCollection.getBounds());
+
+          /*// empty geojson feature collection
+          var geojsonFeatureCollection = {
+            type: 'FeatureCollection',
+            features: []
+          };
+
+          for (var i = featureCollection.length - 1; i >= 0; i--) {
+            // convert ArcGIS Feature to GeoJSON Feature
+            var feature = L.esri.Util.arcgisToGeojson(identifiedFeature, idField);
+
+            // unproject the web mercator coordinates to lat/lng
+            var geoCoords = L.Projection.Mercator.unproject(L.polygon(feature.geometry));
+            feature.geometry = geoCoords;
+
+            geojsonFeatureCollection.features.push(feature);
+          }
+
+          var geojson = L.geoJson(geojsonFeatureCollection).addTo(map);
+          map.fitBounds(geojson.getBounds());*/          
         });
-      });*/
+      });
     }  
   },500);
 </script>
