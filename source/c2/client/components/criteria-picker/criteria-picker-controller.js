@@ -5,7 +5,7 @@ angular.module('c2App')
     // Call server APIs to populate collections
     $scope.agriculturalClassData = []; //cropData = [];
 
-    $http.get('/api/cropprods').success(function(agriculturalClassData) {
+    $http.get('/api/cropharvests').success(function(agriculturalClassData) {
       $scope.agriculturalClassData = agriculturalClassData;
     });
     
@@ -18,5 +18,6 @@ angular.module('c2App')
       //get data
       //perform correlations on data
       //present results
+      console.log('Something happens here!');
     };
   });
