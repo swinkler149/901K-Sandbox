@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "Loading crop production data"
+
+DBUSER="swinkler"
+DBPW="swd56789"
+INPUTDATA="./oes2013bystate.json"
+DBNAME="correlatordb"
+COLLECTION="oes2013bystate"
+
+cat $INPUTDATA | mongoimport -u $DBUSER -p $DBPW -d $DBNAME -c $COLLECTION 
+
+if test $? -eq 0
+then
+   echo "Mongo Import successful"
+else
+   echo "Mongo Import failed"
+fi
