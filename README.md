@@ -1,8 +1,8 @@
 ##THE CORROLATOR
 
-####Vision `Relate Unrelated Things`
+####Vision: Imagine the Unimagtinative
 
-Imagine the Unimagtinative...Over the past few years, the government has released vast amounts of datasets. `The Corrolator` allows a user to assoicate unrelated dataset between US population, employment, wage, and agriculture data and make associations between them.  
+Over the past few years, the government has released vast amounts of datasets. `The Corrolator` allows a user to assoicate unrelated dataset between US population, employment, wage, and agriculture data and make associations between them.  
 
 ####Data Sources
 
