@@ -2,7 +2,7 @@
 
 ####Vision `Relate Unrelated Things`
 
-Over the past few years most government entities (state, local, federal, foreign) have begun embracing open data and are increasingly releasing datasets publicly. This movement has vastly increased the amount of data available, but existing applications seem to be designed mainly to view and access individual datasets one at a time.  This restriction contradicts the notion that, ultimately, everything is related to everything else.  `The Corrolator` allows a user to make associations between US population, employment, wage, and agriculture data.  The user will have the ability to enter a query criteria with results displayed in a geospatial interface.
+Imagine the Unimagtinative...Over the past few years, the government has released vast amounts of datasets. `The Corrolator` allows a user to assoicate unrelated dataset between US population, employment, wage, and agriculture data and make associations between them.  
 
 ####Data Sources
 
@@ -17,4 +17,7 @@ The full list of functionality that will be developed can be viewed in the [Prod
 
 ####Testing
 
-All [Test Cases] (https://github.com/swinkler149/901K-Sandbox/tree/master/Testing) are linked to the User Stories.  Testing was conducted using ..........
+All [Test Cases] (https://github.com/swinkler149/901K-Sandbox/tree/master/Testing) are linked to the User Stories.  Testing is conducted using ..........
+
+####Technology
+This site was developed using the MEAN Stack.  MEAN leverages a collection of javascript frameworks along with the MongoDB database; details can be found here: [MongoDB](http://mongodb.org/), [ExpressJS](http://expressjs.com/), [AngularJS](https://angularjs.org/), and [Node.js](http://nodejs.org/). The site is hosted in Amazon’s EC2.
