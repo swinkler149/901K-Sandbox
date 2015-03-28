@@ -77,21 +77,40 @@ angular.module('c2App')
 			else {
 				pane.innerHTML += "<br>" + $("#agr-picker").val() + ": 0";
 			}
+			
+			var val2 = 0;
+			for(var i = 0; i < $scope.emplData.length; i++) {
+					if(featureCollection.features[0].properties.STATE_NAME.toUpperCase() === $scope.emplData[i].STATE.toUpperCase()) {
+						val2 += $scope.emplData[i].TOT_EMP;
+					}				
+			}
+			if(val2 > 0) {
+				pane.innerHTML += "<br>" + $("#empl-picker").val() + ": " + numberWithCommas(val2);
+			}
+			else {
+				pane.innerHTML += "<br>" + $("#empl-picker").val() + ": 0";
+			}
 		});
   }
 	
 	
     $scope.cropData = [];
+	$scope.emplData = [];
     $scope.correlate = function() {
       //using criteria picker inputs
       //get data
       //perform correlations on data
       //present results
-		console.log('ok');
+	  
 		var cropType = $('#agr-picker').val();
 		$http.get('/api/cropharvests/'+cropType).success(function(cropData) {
 			$scope.cropData = cropData			
 			$scope.processor(cropData);
+		});
+		
+		var emplType = $('#empl-picker').val();
+		$http.get('/api/empl/'+emplType).success(function(emplData) {
+			$scope.emplData = emplData;
 		});
     };
 	
