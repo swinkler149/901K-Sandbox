@@ -126,14 +126,27 @@ angular.module('c2App')
     var cropData = angular.fromJson(rawData);
     //console.log('map.html: Count is: ' + cropData.length);
 	
+	var stateValues = [];
+	for(var i = 0; i < cropData.length; i++) {
+		if(stateValues[cropData[i].State] === undefined) stateValues[cropData[i].State] = 0;
+		stateValues[cropData[i].State] += cropData[i].Value;
+	}
+	console.log(stateValues);
+	
 	var maxCropDataValue = 0;
 	for(var i = 0; i < cropData.length; i++) {
-		maxCropDataValue = maxCropDataValue > cropData[i].Value ? maxCropDataValue : cropData[i].Value;
+		//maxCropDataValue = maxCropDataValue > cropData[i].Value ? maxCropDataValue : cropData[i].Value;
+		if(stateValues[cropData[i].State] > maxCropDataValue) {
+			maxCropDataValue = stateValues[cropData[i].State];
+			console.log(maxCropDataValue + " :: " + cropData[i].State)
+		}
 	}
+	console.log(maxCropDataValue);
 	
     for (var i = cropData.length - 1; i >= 0; i--) {
       var curState = cropData[i].State;
-	  var curStateValue = cropData[i].Value;
+	  var curStateValue = stateValues[cropData[i].State];
+	  console.log(curState + " -- " + curStateValue)
       //console.log('map.html: Processing for ' + curState);      
 
       // Augment existing State feature with info. needed for "heatmap"
@@ -148,8 +161,16 @@ angular.module('c2App')
 				//console.log(featureCollection.features[i].properties.STATE_NAME)
 				for(var j = 0; j < cropData.length; j++) {
 					if(featureCollection.features[i].properties.STATE_NAME.toUpperCase() === cropData[j].State.toUpperCase()) {
+						
+						stateValues = [];
+						for(var k = 0; k < cropData.length; k++) {
+							if(stateValues[cropData[k].State] === undefined) stateValues[cropData[k].State] = 0;
+							stateValues[cropData[k].State] += cropData[k].Value;
+						}
+						curStateValue = stateValues[cropData[j].State];
+						
 						var df = new L.GeoJSON(featureCollection.features[i], {
-							style: style(cropData[j].Value, maxCropDataValue),
+							style: style(curStateValue, maxCropDataValue),
 							onEachFeature: $scope.onEachFeature
 						}).addTo(map);
 					}
@@ -159,10 +180,6 @@ angular.module('c2App')
 		  
           //console.log('map.html: GeoJSON ' + geojson.type + ' (before augmentation):\n', geojson);
         });
-
-      //console.log('map.html: Injecting Value=' + cropData[i].Value);
-      //geojson._layers[0].feature.properties.push({"Value" : cropData[i].Value});
-      geojsonFeatureCollection.features.push(geojson);
     }
   }
   
