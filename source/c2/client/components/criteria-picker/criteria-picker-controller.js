@@ -11,12 +11,4 @@ angular.module('c2App')
     
     //fill these up with data from server
     $scope.employmentTypeData = [];
-
-    $scope.correlate = function() {
-      //using criteria picker inputs
-      //get data
-      //perform correlations on data
-      //present results
-      console.log('Something happens here!');
-    };
   });

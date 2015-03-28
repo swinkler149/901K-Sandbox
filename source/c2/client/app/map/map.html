@@ -12,8 +12,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container-fluid">
     <div class="row main-row">
-        <button class='btn btn-primary' type='button' ng-click='loadData("BEANS")'>Load</button>
-        <button class='btn btn-primary' type='button' onclick='process(document.getElementById("data").innerHTML)'>Process</button>
         <!-- MAP VIEWER -->
         <div id="map" class="col-sm-10 map-col">
         </div>
@@ -40,15 +38,8 @@
   var identifiedFeature;
   // Functions for interacting with the map
   function zoomToFeature(e) {
+  console.log('ok');
     map.fitBounds(e.target.getBounds());
-  }
-
-  function onEachFeature(feature, layer) {
-    layer.on({
-      mouseover: highlightFeature,
-      mouseout: resetHighlight,
-      click: zoomToFeature
-    });
   }
 
   // For assigning colors based on crop harvest
@@ -62,74 +53,36 @@
            d > 10   ? '#FED976' :
                       '#FFEDA0';
   }
+  
+	function componentToHex(c) {
+		var hex = c.toString(16);
+		return hex.length == 1 ? "0" + hex : hex;
+	}
 
-  function style(feature) {
+	function rgbToHex(r, g, b) {
+		return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	}
+	
+	function getStateColor(d, max) {
+	
+		var c = Math.floor(255 - (d / max * 255));
+		c = Math.min(c,255);
+		c = Math.max(c,0);
+		
+		if(isNaN(c)) return rgbToHex(255,255,255);
+		
+		return rgbToHex(255,c,c);
+	}
+
+  function style(stateValue, max) {
     return {
-      fillColor: getColor(feature.properties.Value),
+      fillColor: getStateColor(stateValue, max),
       weight: 2,
       opacity: 1,
-      color: 'white',
+      color: '#000',
       dashArray: '3',
       fillOpacity: 0.7
     };
-  }
-
-  function highlightFeature(e) {
-    var layer = e.target;
-
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-    }
-  }
-  function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-  }
-
-  // Callback function from button
-  function process(rawData) {
-    console.log('map.html: Raw data received:\n', rawData);
-    
-    // empty geojson feature collection
-    var geojsonFeatureCollection = {
-      type: 'FeatureCollection',
-      features: []
-    };
-
-    var cropData = angular.fromJson(rawData);
-    console.log('map.html: Count is: ' + cropData.length);
-    for (var i = cropData.length - 1; i >= 0; i--) {
-      var curState = cropData[i].State;
-      console.log('map.html: Processing for ' + curState);      
-
-      // Augment existing State feature with info. needed for "heatmap"
-      var geojson;
-      states.find()
-        .layers('2')
-        .text(curState)
-        .run(function(error, featureCollection) {
-          console.log('map.html: Found a featureCollection\n',featureCollection);
-          geojson = new L.GeoJSON(featureCollection.features[0], {});
-          console.log('map.html: GeoJSON ' + geojson.type + ' (before augmentation):\n', geojson);
-        });
-
-      console.log('map.html: Injecting Value=' + cropData[i].Value);
-      //geojson._layers[0].feature.properties.push({"Value" : cropData[i].Value});
-      geojsonFeatureCollection.features.push(geojson);
-    }
-    console.log("geoJson?\n", geojsonFeatureCollection);
-
-    // Use GeoJSON doc we just created
-    geojson = L.geoJson(geojsonFeatureCollection, {
-      style: style,
-      onEachFeature: onEachFeature
-    }).addTo(map);
   }
 
   // Click/State Selection handling
@@ -148,6 +101,7 @@
         }
       }).addTo(map); // Currently, this highlights the County instead of the State! */
       pane.innerHTML = 'Selected State: <b>' + featureCollection.features[0].properties.STATE_NAME + '</b>';
+	  
       //map.fitBounds(featureCollection.getBounds());
 
       /*// empty geojson feature collection
@@ -211,5 +165,4 @@
 </script>
 
 <div ng-include="'components/footer/footer.html'"></div>
-<div id="data">{{ cropData }}</div>
 
