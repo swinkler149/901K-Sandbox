@@ -86,44 +86,7 @@
   }
 
   // Click/State Selection handling
-  function onClick(e) {
-    if(identifiedFeature){
-      map.removeLayer(identifiedFeature);
-      pane.innerHTML = 'Loading...';
-    }
-    states.identify().on(map).at(e.latlng).run(function(error, featureCollection){
-      /*identifiedFeature = new L.GeoJSON(featureCollection.features[0], {
-        style: function(){
-          return {
-            color: '#5C7DB8',
-            weight: 2
-          };
-        }
-      }).addTo(map); // Currently, this highlights the County instead of the State! */
-      pane.innerHTML = 'Selected State: <b>' + featureCollection.features[0].properties.STATE_NAME + '</b>';
-	  
-      //map.fitBounds(featureCollection.getBounds());
-
-      /*// empty geojson feature collection
-      var geojsonFeatureCollection = {
-        type: 'FeatureCollection',
-        features: []
-      };
-      for (var i = featureCollection.length - 1; i >= 0; i--) {
-        // convert ArcGIS Feature to GeoJSON Feature
-        var feature = L.esri.Util.arcgisToGeojson(identifiedFeature, idField);
-
-        // unproject the web mercator coordinates to lat/lng
-        var geoCoords = L.Projection.Mercator.unproject(L.polygon(feature.geometry));
-        feature.geometry = geoCoords;
-
-        geojsonFeatureCollection.features.push(feature);
-      }
-
-      var geojson = L.geoJson(geojsonFeatureCollection).addTo(map);
-      map.fitBounds(geojson.getBounds());*/
-    });
-  }
+  
 
   // Workaround...
   var setint = setInterval(function() {
@@ -157,7 +120,6 @@
       });
 
       pane = document.getElementById('selectedFeatures');
-      map.on('click', onClick);
 
       console.log('map.controller: Successfully loaded map!');    
     }
