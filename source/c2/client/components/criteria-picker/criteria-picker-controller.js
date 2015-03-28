@@ -3,15 +3,14 @@
 angular.module('c2App')
   .controller('CriteriaPickerCtrl', function ($scope, $location, $http, socket) {
     // Call server APIs to populate collections
-    $scope.agriculturalClassData = []; //cropData = [];
+    $scope.agriculturalClassData = [];
 
-    $http.get('/api/cropharvests').success(function(agriculturalClassData) {
+    $http.get('/api/cropharvests/distinct/Commodity').success(function(agriculturalClassData) {
       $scope.agriculturalClassData = agriculturalClassData;
     });
     
     //fill these up with data from server
     $scope.employmentTypeData = [];
-    //$scope.agriculturalClassData = cropData;//{};
 
     $scope.correlate = function() {
       //using criteria picker inputs

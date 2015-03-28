@@ -9,11 +9,15 @@
  */
 angular.module('c2App')
   .controller('MapCtrl', function ($scope, $http, socket) {
-    // This is done directly in criteria-picker controller now
-    console.log("Shouldn't need cropdata here...");
-    /*$scope.cropData = [];
-
-    $http.get('/api/cropprods').success(function(cropData) {
-      $scope.cropData = cropData;
-    });*/
+    $scope.cropData = [];
+    
+    // Call server APIs to populate collections
+    $scope.loadData = function(cropType) {
+      console.log('It\'s Amazing! You provided: ', cropType);
+      $http.get('/api/cropharvests/'+cropType).success(function(cropData) {
+        console.log('Got back this:\n', cropData);
+        $scope.cropData = cropData;
+        //document.getElementById("data").innerHTML=cropData;
+      });
+    }
   });

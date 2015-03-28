@@ -12,6 +12,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container-fluid">
     <div class="row main-row">
+        <button class='btn btn-primary' type='button' ng-click='loadData("BEANS")'>Load</button>
+        <button class='btn btn-primary' type='button' onclick='process(document.getElementById("data").innerHTML)'>Process</button>
         <!-- MAP VIEWER -->
         <div id="map" class="col-sm-10 map-col">
         </div>
@@ -25,52 +27,172 @@
     </div>
 </div>
 <script>
-  function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-  }
-  function onEachFeature(feature, layer) {
-    layer.on({
-      click: zoomToFeature
-    });
-  }
-  var popup = L.popup();
+  /*var popup = L.popup();
   function onMapClick(e) {
       popup
           .setLatLng(e.latlng)
           .setContent("You clicked the map at " + e.latlng.toString())
           .openOn(map);
+  }*/
+  // Initialize some variables...
+  var map;
+  var states;
+  var identifiedFeature;
+  // Functions for interacting with the map
+  function zoomToFeature(e) {
+    map.fitBounds(e.target.getBounds());
   }
 
-  var identifiedFeature;
-  var pane;
-  var states;
-  var map;
+  function onEachFeature(feature, layer) {
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: zoomToFeature
+    });
+  }
+
+  // For assigning colors based on crop harvest
+  function getColor(d) {
+    return d > 1000 ? '#800026' :
+           d > 500  ? '#BD0026' :
+           d > 200  ? '#E31A1C' :
+           d > 100  ? '#FC4E2A' :
+           d > 50   ? '#FD8D3C' :
+           d > 20   ? '#FEB24C' :
+           d > 10   ? '#FED976' :
+                      '#FFEDA0';
+  }
+
+  function style(feature) {
+    return {
+      fillColor: getColor(feature.properties.Value),
+      weight: 2,
+      opacity: 1,
+      color: 'white',
+      dashArray: '3',
+      fillOpacity: 0.7
+    };
+  }
+
+  function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+  }
+  function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+  }
+
+  // Callback function from button
+  function process(rawData) {
+    console.log('map.html: Raw data received:\n', rawData);
+    
+    // empty geojson feature collection
+    var geojsonFeatureCollection = {
+      type: 'FeatureCollection',
+      features: []
+    };
+
+    var cropData = angular.fromJson(rawData);
+    console.log('map.html: Count is: ' + cropData.length);
+    for (var i = cropData.length - 1; i >= 0; i--) {
+      var curState = cropData[i].State;
+      console.log('map.html: Processing for ' + curState);      
+
+      // Augment existing State feature with info. needed for "heatmap"
+      var geojson;
+      states.find()
+        .layers('2')
+        .text(curState)
+        .run(function(error, featureCollection) {
+          console.log('map.html: Found a featureCollection\n',featureCollection);
+          geojson = new L.GeoJSON(featureCollection.features[0], {});
+          console.log('map.html: GeoJSON ' + geojson.type + ' (before augmentation):\n', geojson);
+        });
+
+      console.log('map.html: Injecting Value=' + cropData[i].Value);
+      //geojson._layers[0].feature.properties.push({"Value" : cropData[i].Value});
+      geojsonFeatureCollection.features.push(geojson);
+    }
+    console.log("geoJson?\n", geojsonFeatureCollection);
+
+    // Use GeoJSON doc we just created
+    geojson = L.geoJson(geojsonFeatureCollection, {
+      style: style,
+      onEachFeature: onEachFeature
+    }).addTo(map);
+  }
+
+  // Click/State Selection handling
+  function onClick(e) {
+    if(identifiedFeature){
+      map.removeLayer(identifiedFeature);
+      pane.innerHTML = 'Loading...';
+    }
+    states.identify().on(map).at(e.latlng).run(function(error, featureCollection){
+      /*identifiedFeature = new L.GeoJSON(featureCollection.features[0], {
+        style: function(){
+          return {
+            color: '#5C7DB8',
+            weight: 2
+          };
+        }
+      }).addTo(map); // Currently, this highlights the County instead of the State! */
+      pane.innerHTML = 'Selected State: <b>' + featureCollection.features[0].properties.STATE_NAME + '</b>';
+      //map.fitBounds(featureCollection.getBounds());
+
+      /*// empty geojson feature collection
+      var geojsonFeatureCollection = {
+        type: 'FeatureCollection',
+        features: []
+      };
+      for (var i = featureCollection.length - 1; i >= 0; i--) {
+        // convert ArcGIS Feature to GeoJSON Feature
+        var feature = L.esri.Util.arcgisToGeojson(identifiedFeature, idField);
+
+        // unproject the web mercator coordinates to lat/lng
+        var geoCoords = L.Projection.Mercator.unproject(L.polygon(feature.geometry));
+        feature.geometry = geoCoords;
+
+        geojsonFeatureCollection.features.push(feature);
+      }
+
+      var geojson = L.geoJson(geojsonFeatureCollection).addTo(map);
+      map.fitBounds(geojson.getBounds());*/
+    });
+  }
 
   // Workaround...
   var setint = setInterval(function() {
-
-    if(typeof require != undefined) // && typeof L.esri != undefined && typeof L.esri.Geocoding != undefined) 
-    {
+    if(typeof require != undefined) {
       clearInterval(setint);
-
+      // Initialize the map
       map = L.map('map').setView([37.78, -92.85], 4); // All of US
       //map.on('click', onMapClick);
 
       L.esri.basemapLayer('Topographic').addTo(map);
-      console.log('Successfully loaded map!');
       //states = L.esri.featureLayer('http://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0', {
-      //states = L.esri.dynamicMapLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer', {   
+      //states = L.esri.dynamicMapLayer('http://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer', {
       states = L.esri.dynamicMapLayer('http://sampleserver5.arcgisonline.com/arcgis/rest/services/USA/MapServer', {
-        layers: [2],
-        opacity: 0.5,
-        useCors: false
+          layers: [2],
+          opacity: 0.5,
+          useCors: false
       }).addTo(map);
-   
+
       // Auto-zoom on load
       /*L.esri.Geocoding.geocode().text('Virginia').run(function (error, response) {
           map.fitBounds(response.results[0].bounds);
       });*/
-      
+
       var searchControl = new L.esri.Geocoding.Controls.Geosearch().addTo(map);
       var results = new L.LayerGroup().addTo(map);
       searchControl.on('results', function(data){
@@ -81,46 +203,13 @@
       });
 
       pane = document.getElementById('selectedFeatures');
-      map.on('click', function (e) {
-        if(identifiedFeature){
-          map.removeLayer(identifiedFeature);
-          pane.innerHTML = 'Loading...';
-        }
-        states.identify().on(map).at(e.latlng).run(function(error, featureCollection){
-          /*identifiedFeature = new L.GeoJSON(featureCollection.features[0], {
-            style: function(){
-              return {
-                color: '#5C7DB8',
-                weight: 2
-              };
-            }
-          }).addTo(map);*/
-          pane.innerHTML = 'Selected State: <b>' + featureCollection.features[0].properties.STATE_NAME + '</b>';
-          //map.fitBounds(featureCollection.getBounds());
+      map.on('click', onClick);
 
-          /*// empty geojson feature collection
-          var geojsonFeatureCollection = {
-            type: 'FeatureCollection',
-            features: []
-          };
-
-          for (var i = featureCollection.length - 1; i >= 0; i--) {
-            // convert ArcGIS Feature to GeoJSON Feature
-            var feature = L.esri.Util.arcgisToGeojson(identifiedFeature, idField);
-
-            // unproject the web mercator coordinates to lat/lng
-            var geoCoords = L.Projection.Mercator.unproject(L.polygon(feature.geometry));
-            feature.geometry = geoCoords;
-
-            geojsonFeatureCollection.features.push(feature);
-          }
-
-          var geojson = L.geoJson(geojsonFeatureCollection).addTo(map);
-          map.fitBounds(geojson.getBounds());*/          
-        });
-      });
-    }  
-  },500);
+      console.log('map.controller: Successfully loaded map!');    
+    }
+  }, 500);
 </script>
 
 <div ng-include="'components/footer/footer.html'"></div>
+<div id="data">{{ cropData }}</div>
+
