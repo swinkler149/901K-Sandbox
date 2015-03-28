@@ -4,8 +4,10 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var EmplSchema = new Schema({
-  EmplCd: String,
-  Descr: String
+   STATE : String,
+	OCC_TITLE: String,
+  TOT_EMP: Number,
+  OCC_CODE: String
 });
 
 module.exports = mongoose.model('Empl', EmplSchema);
