@@ -1,6 +1,6 @@
 ##THE CORROLATOR
 
-####Vision: Imagine the Unimagtinative
+####Vision: Imagine the Unimaginable
 
 Over the past few years, the government has released vast amounts of datasets. `The Corrolator` allows a user to assoicate unrelated dataset between US population, employment, wage, and agriculture data and make associations between them.  
 
