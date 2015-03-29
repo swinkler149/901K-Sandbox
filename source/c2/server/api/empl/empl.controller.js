@@ -5,13 +5,13 @@ var Empl = require('./empl.model');
 
 // Get list of empls
 exports.index = function(req, res) {
-	
+  console.log('empl.controller: Received: empl='+req.params.empl);
   Empl.count({ "OCC_TITLE" : req.params.empl }, function (err, count) {
     if (err) return handleError(err);
-    console.log('cropharvest.controller: There are %d records matching the criteria', count);
+    console.log('empl.controller: There are %d records matching the criteria', count);
   });
   
-  // find each crop record with the given parameters, selecting the identified columns
+  // find each empl record with the given parameters, selecting the identified columns
   Empl.find({ "OCC_TITLE" : req.params.empl }, 'STATE OCC_TITLE TOT_EMP', function (err, empls) {
     if(err) { return handleError(res, err); }
     return res.json(200, empls);
