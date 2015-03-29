@@ -1,12 +1,4 @@
 <style>
-  #selectedFeatures {
-    position: absolute;
-    top: 100px;
-    right: 280px;
-    z-index: 10;
-    background: white;
-    padding: 1em;
-  }
   .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
@@ -38,7 +30,6 @@
         <!-- MAP VIEWER -->
         <div id="map" class="col-sm-10 map-col">
         </div>
-        <div id="selectedFeatures" class="leaflet-bar">No State Selected</div>
 
         <!-- CRITERIA FILTERS -->
         <div class="col-sm-2 selector-col">
@@ -48,16 +39,10 @@
     </div>
 </div>
 <script>
-  /*var popup = L.popup();
-  function onMapClick(e) {
-      popup
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(map);
-  }*/
   // Initialize some variables...
   var map;
   var states;
+  var pane;
   var identifiedFeature;
   // Functions for interacting with the map
   function zoomToFeature(e) {
@@ -129,6 +114,7 @@
           map.fitBounds(response.results[0].bounds);
       });*/
 
+      // Include handy Geosearch control
       var searchControl = new L.esri.Geocoding.Controls.Geosearch().addTo(map);
       var results = new L.LayerGroup().addTo(map);
       searchControl.on('results', function(data){
@@ -137,6 +123,15 @@
           results.addLayer(L.marker(data.results[i].latlng));
         }
       });
+
+      // Pane for showing relevant data
+      var info = L.control({position: 'topright'});
+      info.onAdd = function (map) {
+        pane = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        pane.innerHTML += 'No State Selected'; // Initial text
+        return pane;
+      };
+      info.addTo(map);
 
       // Include static Legend
       var legend = L.control({position: 'bottomright'});
@@ -155,8 +150,6 @@
       };
       legend.addTo(map);
       
-      pane = document.getElementById('selectedFeatures');
-
       console.log('map.html: Successfully loaded map!');    
     }
   }, 500);

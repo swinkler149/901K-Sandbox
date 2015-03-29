@@ -32,13 +32,16 @@ angular.module('c2App')
           fillOpacity: 0.5
       });
 
-      //layer.bringToFront();
       if (!L.Browser.ie && !L.Browser.opera) {
         layer.bringToFront();
       }
+
+      // Update pane here, if we want to change pane contents on hover
+      $scope.updatePane(e);
     }
 	
     $scope.resetHighlight = function(e) {
+      //geojson.resetStyle();
       var layer = e.target;
 
       layer.setStyle({
@@ -48,8 +51,6 @@ angular.module('c2App')
           dashArray: '4',
           fillOpacity: 0.5
       });
-
-      //layer.bringToBack();
     }
 	
     function numberWithCommas(x) {
@@ -59,10 +60,11 @@ angular.module('c2App')
         x = x.replace(pattern, "$1,$2");
       return x;
     }
-  
+
     $scope.updatePane = function(e) {
       states.identify().on(map).at(e.latlng).run(function(error, featureCollection){
         var selState = featureCollection.features[0].properties.STATE_NAME; // just to simplify future references
+
         pane.innerHTML = 'Selected State: <b>' + selState + '</b>';
 	
         var val = 0;
