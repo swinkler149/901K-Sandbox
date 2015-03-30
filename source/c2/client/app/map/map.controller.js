@@ -176,25 +176,26 @@ angular.module('c2App')
 	
         var val = 0;
         var result = $.grep($scope.cropData, 
-            function(element, index) { return (element.State.toUpperCase() === selState.toUpperCase()); });
-        val += result[0].Value;
+            function(element, index) {
+				if(element.State.toUpperCase() === selState.toUpperCase()) {
+					val += element.Value; 
+				}
+				return (element.State.toUpperCase() === selState.toUpperCase()); 
+			});
+		if(val > 0)
+		  pane.innerHTML += "<br>" + $("#agr-picker").val() + ": " + numberWithCommas(val) + " acres harvested";
 		
-        var val2 = 0;
+        val = 0;
         result = $.grep($scope.emplData,
-            function(element, index) { return (element.STATE.toUpperCase() === selState.toUpperCase()); });
-        val2 += result[0].TOT_EMP;
-		
-        console.log('map.controller: For ' + selState + ', found cropData.Value=' + val + ', emplData.TOT_EMP=' + val2); // Debug output
-        
-        // Incorporate values into Pane text
+            function(element, index) {
+				if(element.STATE.toUpperCase() === selState.toUpperCase()) {
+					val += element.TOT_EMP; 
+				}
+				return (element.STATE.toUpperCase() === selState.toUpperCase()); 
+			});
         if(val > 0)
-          pane.innerHTML += "<br>" + $("#agr-picker").val() + ": " + numberWithCommas(val) + " acres harvested";
-        else
-          pane.innerHTML += "<br>" + $("#agr-picker").val() + ": 0";
-        if(val2 > 0)
-          pane.innerHTML += "<br>" + $("#empl-picker").val() + ": " + numberWithCommas(val2);
-        else
-          pane.innerHTML += "<br>" + $("#empl-picker").val() + ": 0";
+          pane.innerHTML += "<br>" + $("#empl-picker").val() + ": " + numberWithCommas(val);
+	  
       });
     }
     
