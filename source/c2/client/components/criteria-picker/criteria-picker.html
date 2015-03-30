@@ -1,31 +1,14 @@
 <div ng-controller="CriteriaPickerCtrl">
+
+  <select id='empl-picker' class="form-control">
+    <option value="" disabled selected>Select Employment Type</option>
+    <option ng-repeat='item in employmentTypeData'>{{item}}</option>
+  </select>
+
+  <select id='agr-picker' class="form-control">
+    <option value="" disabled selected>Select Agricultural Class</option>
+    <option ng-repeat='item in agriculturalClassData'>{{item}}</option>
+  </select>
     
-    <!-- Employment Type FILTER. -->
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="ddl-employment" data-toggle="dropdown" aria-expanded="true" style="width:100%;">
-            Select Employment Type
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu employment-menu-items" role="menu" aria-labelledby="ddl-employment" style="width:100%;">
-            <li ng-repeat="item in employmentTypeData">
-                {{item.title}}
-            </li>
-        </ul>
-    </div>
-    
-    <!-- Agricultural Class FILTER -->
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="ddl-agricultural" data-toggle="dropdown" aria-expanded="true" style="width:100%;">
-            Select Agricultural Class
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu agricultural-menu-items" role="menu" aria-labelledby="ddl-agricultural" style="width:100%;">
-            <li ng-repeat="item in agriculturalClassData">
-                {{item.title}}
-            </li>
-        </ul>
-    </div>
-    
-    <button class='btn btn-primary' type='button' ng-click='correlate()'>Correlate</button>
-    
+  <button class='btn btn-primary' type='button' ng-click='correlate()'>Correlate</button>
 </div>

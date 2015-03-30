@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/c2-dev'
+    uri: 'mongodb://dbuser:dbuserpw@localhost/correlatordb'
   },
 
   seedDB: true

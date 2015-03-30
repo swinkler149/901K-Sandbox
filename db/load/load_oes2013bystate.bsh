@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "Loading OES by state data"
+
+DBUSER="dbuser"
+DBPW="dbuserpw"
+INPUTDATA="./oes2013bystate.json"
+DBNAME="correlatordb"
+COLLECTION="oesbystate"
+
+cat $INPUTDATA | mongoimport -u $DBUSER -p $DBPW -d $DBNAME -c $COLLECTION 
+
+if test $? -eq 0
+then
+   echo "Mongo Import successful"
+else
+   echo "Mongo Import failed"
+fi

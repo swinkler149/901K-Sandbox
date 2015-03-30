@@ -5,7 +5,7 @@ DBUSER="dbuser"
 DBPW="dbuserpw"
 INPUTDATA="./cropprod.json"
 DBNAME="correlatordb"
-COLLECTION="cropprod2012"
+COLLECTION="cropprod"
 
 cat $INPUTDATA | mongoimport -u $DBUSER -p $DBPW -d $DBNAME -c $COLLECTION 
 
