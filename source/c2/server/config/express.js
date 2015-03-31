@@ -39,7 +39,7 @@ module.exports = function(app) {
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(path.join(config.root, 'client')));
     //app.set('appPath', 'client');
-    app.set('appPath',path.join(config.root, 'client'))
+    app.set('appPath',path.join(config.root, 'client')); //*** There seems to be a bug with simply using client in some environments.
     app.use(morgan('dev'));
     app.use(errorHandler()); // Error handler - has to be last
   }
