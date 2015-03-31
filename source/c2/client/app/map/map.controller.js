@@ -213,6 +213,12 @@ angular.module('c2App')
 	  
       });
     }
+	
+	$scope.hideFilter = function() {		
+	  $('.selector-col').css('display','none');
+	  $('.map-col').removeClass('col-sm-6');
+	  $('.map-col').addClass('col-sm-12');
+	}
     
     $scope.correlate = function() {
 	  
@@ -230,9 +236,7 @@ angular.module('c2App')
 			$scope.processor(emplData, "STATE", "TOT_EMP");
       });
 	  
-	  $('.selector-col').css('display','none');
-	  $('.map-col').removeClass('col-sm-6');
-	  $('.map-col').addClass('col-sm-12');
+	  $scope.hideFilter();
     };
 	
     $scope.processor = function(rawData, input, output) {
