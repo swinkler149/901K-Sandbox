@@ -19,6 +19,7 @@ angular.module('c2App')
 	  var map;
 	  var states;
 	  var pane;
+	  var filterControl;
 	  var identifiedFeature;
 	  // Functions for interacting with the map
 	  function zoomToFeature(e) {
@@ -100,6 +101,20 @@ angular.module('c2App')
 			return pane;
 		  };
 		  info.addTo(map);
+		  
+		  var filterButton = L.control({position: 'topleft'});
+		  filterButton.onAdd = function (map) {
+			filterControl = L.DomUtil.create('div', 'filter-button'); // create a div with a class "info"
+			filterControl.innerHTML += 'Filter'; // Initial text
+			return filterControl;
+		  };
+		  filterButton.addTo(map);
+		  
+		  $('.filter-button').click(function() {
+			  $('.selector-col').css('display','block');
+			  $('.map-col').removeClass('col-sm-12');
+			  $('.map-col').addClass('col-sm-6');
+		  });
 
 		  // Include static Legend
 		  var legend = L.control({position: 'bottomright'});
@@ -214,6 +229,10 @@ angular.module('c2App')
 		if($('.empl-panel').find('input[type="checkbox"]').is(':checked'))
 			$scope.processor(emplData, "STATE", "TOT_EMP");
       });
+	  
+	  $('.selector-col').css('display','none');
+	  $('.map-col').removeClass('col-sm-6');
+	  $('.map-col').addClass('col-sm-12');
     };
 	
     $scope.processor = function(rawData, input, output) {
