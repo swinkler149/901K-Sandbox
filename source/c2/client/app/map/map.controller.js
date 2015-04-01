@@ -225,14 +225,14 @@ angular.module('c2App')
       var cropType = $('#agr-picker').val();
       $http.get('/api/cropharvests/'+cropType).success(function(cropData) {
         $scope.cropData = cropData;		
-		if($('.agr-panel').find('input[type="checkbox"]').is(':checked'))
+		if($('#heatmap-agr-radios').is(':checked'))
 			$scope.processor(cropData, "State", "Value");
       });
 		
       var emplType = $('#empl-picker').val();
       $http.get('/api/empl/'+emplType).success(function(emplData) {
         $scope.emplData = emplData;		
-		if($('.empl-panel').find('input[type="checkbox"]').is(':checked'))
+		if($('#heatmap-empl-radios').is(':checked'))
 			$scope.processor(emplData, "STATE", "TOT_EMP");
       });
 	  
