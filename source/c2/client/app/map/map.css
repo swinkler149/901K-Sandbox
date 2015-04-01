@@ -119,3 +119,24 @@ body {
 	margin-right: 8px;
 	opacity: 0.7;
 }
+
+[ng-controller="CriteriaPickerCtrl"] .row {
+	border-bottom:1px solid black;
+	padding-top:10px;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row:last-of-type {
+	border-bottom:1px solid black;
+	padding-top:10px;
+	margin-bottom:10px;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row:first-of-type {
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+	padding-top:10px;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row:nth-child(odd) {
+	background-color:rgb(210, 255, 205);
+}
