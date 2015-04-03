@@ -135,17 +135,21 @@ angular.module('c2App')
 		  
 		  //testing map click fix
 		  map.on('click', $scope.updatePane);
+		  map.on('mouseover', $scope.highlightFeature);
+		  map.on('mouseout', $scope.resetHighlight);
 		  
 		  console.log('map.html: Successfully loaded map!');    
 		}
 	  }, 500);
 
     $scope.onEachFeature = function(feature, layer) {
+    	/* there seems to buginess when adding events to the layer, moved event handle setup to map init function
       layer.on({
           mouseover: $scope.highlightFeature,
           mouseout: $scope.resetHighlight,
           click: $scope.updatePane
       });
+      */
     }
 
     $scope.highlightFeature = function(e) {
