@@ -48,7 +48,7 @@ body {
 }
 
 .selector-col {
-    padding:15px;
+    padding:0px;
     /* box-shadow:0px 8px 18px rgba(0,0,0,0.2); */
     min-height:700px;
     /* border-radius:20px;
@@ -121,19 +121,20 @@ body {
 }
 
 [ng-controller="CriteriaPickerCtrl"] .row {
-	border-bottom:1px solid black;
+	border-bottom:0px solid black;
 	padding-top:10px;
+	background-color:#F7FCB9;
 }
 
 [ng-controller="CriteriaPickerCtrl"] .row:last-of-type {
-	border-bottom:1px solid black;
+	border-bottom:0px solid black;
 	padding-top:10px;
 	margin-bottom:10px;
 }
 
 [ng-controller="CriteriaPickerCtrl"] .row:first-of-type {
-	border-top:1px solid black;
-	border-bottom:1px solid black;
+	border-top:0px solid black;
+	border-bottom:0px solid black;
 	padding-top:10px;
 }
 
