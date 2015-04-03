@@ -13,25 +13,6 @@ angular.module('c2App')
     $http.get('/api/empl/distinct/OCC_TITLE').success(function(employmentTypeData) {
       $scope.employmentTypeData = employmentTypeData;
     });
-	
-	//handle presentation type selectors
-	$('[ng-controller="CriteriaPickerCtrl"]').find('[type="checkbox"]').change(function() {
-		
-		if(!$(this).is(':checked')) {
-			$('[ng-controller="CriteriaPickerCtrl"]').find('[type="checkbox"]').each(function() {
-				$(this).removeAttr('disabled');
-			});
-		}
-		else {
-			$('[ng-controller="CriteriaPickerCtrl"]').find('[type="checkbox"]').each(function() {
-				if(!$(this).is(':checked')){
-					$(this).attr('disabled','disabled');
-				} 
-			});
-		}
-	});
-	
-	
   });
   
   
