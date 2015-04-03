@@ -70,21 +70,24 @@ angular.module('c2App')
   }
 
     $scope.highlightFeature = function(e) {
-      var layer = e.target;
-
-      layer.setStyle({
-          weight: 4,
-          color: '#666666',
-          dashArray: '',
-          fillOpacity: 0.5
-      });
-
-      if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
-      }
-
-      // Update pane here, if we want to change pane contents on hover
-      $scope.updatePane(e);
+    	var map = e.target;
+    	map.eachLayer(function(layer) {
+	      //var layer = e.target;
+	
+	      layer.setStyle({
+	          weight: 4,
+	          color: '#666666',
+	          dashArray: '',
+	          fillOpacity: 0.5
+	      });
+	
+	      if (!L.Browser.ie && !L.Browser.opera) {
+	        layer.bringToFront();
+	      }
+	
+	      // Update pane here, if we want to change pane contents on hover
+	      $scope.updatePane(e);
+    	});
     }
 	
     $scope.resetHighlight = function(e) {
