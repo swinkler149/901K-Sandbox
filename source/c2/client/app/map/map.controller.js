@@ -133,6 +133,9 @@ angular.module('c2App')
 		  };
 		  legend.addTo(map);
 		  
+		  //testing map click fix
+		  map.on('click', $scope.updatePane);
+		  
 		  console.log('map.html: Successfully loaded map!');    
 		}
 	  }, 500);
