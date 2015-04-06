@@ -12,6 +12,7 @@ angular.module('c2App')
     // Initialize scope collections    
     $scope.cropData = [];
     $scope.emplData = [];
+    $scope.livestockData = [];
     $scope.cropLayerGroup = new L.LayerGroup();
 	
 	
@@ -235,6 +236,15 @@ angular.module('c2App')
 		if($('#heatmap-empl-radios').is(':checked'))
 			$scope.processor(emplData, "STATE", "TOT_EMP");
       });
+
+      //var livestockType = $('#livestock-picker').val();
+      $http.get('/api/livestock/').success(function(livestockData) {
+        $scope.livestockData = livestockData;
+                /*if($('#heatmap-empl-radios').is(':checked'))
+                        $scope.processor(emplData, "STATE", "TOT_EMP");*/
+		console.log(livestockData);
+      });
+
 	  
 	  $scope.hideFilter();
     };
