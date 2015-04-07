@@ -97,11 +97,12 @@ angular.module('c2App')
 		  // Pane for showing relevant data
 		  var info = L.control({position: 'topright'});
 		  info.onAdd = function (map) {
-			pane = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			pane = L.DomUtil.create('div', 'info update-pane'); // create a div with a class "info"
 			pane.innerHTML += 'No State Selected'; // Initial text
 			return pane;
 		  };
 		  info.addTo(map);
+		  $('.update-pane').hide();
 		  
 		  var filterButton = L.control({position: 'topleft'});
 		  filterButton.onAdd = function (map) {
@@ -245,6 +246,7 @@ angular.module('c2App')
 		console.log(livestockData);
       });
 
+		$('.update-pane').show();
 	  
 	  $scope.hideFilter();
     };
