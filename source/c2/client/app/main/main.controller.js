@@ -3,6 +3,8 @@
 angular.module('c2App')
   .controller('MainCtrl', function ($scope, $http, socket) {
     $scope.awesomeThings = [];
+    
+    //this is a test of the AutoGit nodemon system...
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;

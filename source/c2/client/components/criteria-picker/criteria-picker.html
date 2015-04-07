@@ -1,14 +1,56 @@
 <div ng-controller="CriteriaPickerCtrl">
-
-  <select id='empl-picker' class="form-control">
-    <option value="" disabled selected>Select Employment Type</option>
-    <option ng-repeat='item in employmentTypeData'>{{item}}</option>
-  </select>
-
-  <select id='agr-picker' class="form-control">
-    <option value="" disabled selected>Select Agricultural Class</option>
-    <option ng-repeat='item in agriculturalClassData'>{{item}}</option>
-  </select>
+	
+	<div class='row'>
+		<div class='col-sm-6'>
+			<select id='empl-picker' class="form-control">
+				<option value="" disabled selected>Select Employment Type</option>
+				<option ng-repeat='item in employmentTypeData'>{{item}}</option>
+			</select>
+		</div>
+		<div class='col-sm-6'>
+			<div class="radio">
+			  <label>
+				<input type="radio" name="heatmapRadios" id="heatmap-empl-radios" value="1" checked>
+					Display as heatmap
+			  </label>
+			</div>
+		</div>
+	</div>
+	
+	<div class='row'>
+		<div class='col-sm-6'>
+			<select id='agr-picker' class="form-control">
+				<option value="" disabled selected>Select Crop Harvest Type</option>
+				<option ng-repeat='item in agriculturalClassData'>{{item}}</option>
+			</select>
+		</div>
+		<div class='col-sm-6'>
+			<div class="radio">
+			  <label>
+				<input type="radio" name="heatmapRadios" id="heatmap-agr-radios" value="2">
+					Display as heatmap
+			  </label>
+			</div>
+		</div>
+	</div>
+	
+	<div class='row'>
+		<div class='col-sm-6'>
+			<select id='commodity-picker' class="form-control">
+				<option value="" disabled selected>Select Commodity Type</option>
+				<option ng-repeat='item in commodityTypeData'>{{item}}</option>
+			</select>
+		</div>
+		<div class='col-sm-6'>
+			<div class="radio">
+			  <label>
+				<input type="radio" name="heatmapRadios" id="heatmap-commodity-radios" value="3">
+					Display as heatmap
+			  </label>
+			</div>
+		</div>
+	</div>
     
-  <button class='btn btn-primary' type='button' ng-click='correlate()'>Correlate</button>
+	<button class='btn btn-primary' type='button' ng-click='correlate()'>Correlate</button>
+	<button class='btn btn-danger' type='button' ng-click='hideFilter()'>Cancel</button>
 </div>

@@ -12,5 +12,7 @@ angular.module('c2App')
     $scope.employmentTypeData = [];
     $http.get('/api/empl/distinct/OCC_TITLE').success(function(employmentTypeData) {
       $scope.employmentTypeData = employmentTypeData;
-    })
+    });
   });
+  
+  

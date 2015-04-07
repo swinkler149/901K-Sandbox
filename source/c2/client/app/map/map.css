@@ -29,7 +29,7 @@ body {
 }
 
 .main-row {
-    margin:10px;
+    margin:20px;
     margin-top:25px;
     margin-bottom:25px;
     /* margin-top:25px; */
@@ -38,8 +38,6 @@ body {
     
     border:1px solid rgba(46, 141, 176, 0.73);
     /* border-radius:20px; */
-    border-top-right-radius:30px;
-    border-bottom-right-radius:30px;
 }
 
 .map-col {
@@ -47,18 +45,17 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     min-height:700px;
-    border-radius:20px;
-    border-top-right-radius:0px;
-    border-bottom-right-radius:0px;
 }
 
 .selector-col {
     padding:15px;
+    padding-top:0px;
     /* box-shadow:0px 8px 18px rgba(0,0,0,0.2); */
     min-height:700px;
     /* border-radius:20px;
     border-top-left-radius:0px;
     border-bottom-left-radius:0px; */
+	display:none;
 }
 
 .selector-col select {
@@ -85,4 +82,63 @@ body {
     width:100%;
     margin-top:25px;
     color:black;
+}
+
+.filter-button {
+	padding: 6px 8px;
+	font: 14px/16px Arial, Helvetica, sans-serif;
+	background: white;
+	background: rgba(255,255,255,1);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
+	cursor:pointer;
+}
+.filter-button:hover {
+	box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+.info {
+	padding: 6px 8px;
+	font: 14px/16px Arial, Helvetica, sans-serif;
+	background: white;
+	background: rgba(255,255,255,0.8);
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	border-radius: 5px;
+}
+.info h4 {
+	margin: 0 0 5px;
+	color: #777;
+}
+.legend {
+	line-height: 18px;
+	color: #555;
+}
+.legend i {
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin-right: 8px;
+	opacity: 0.7;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row {
+	border-bottom:0px solid black;
+	padding-top:10px;
+	background-color:#F7FCB9;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row:last-of-type {
+	border-bottom:0px solid black;
+	padding-top:10px;
+	margin-bottom:10px;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row:first-of-type {
+	border-top:0px solid black;
+	border-bottom:0px solid black;
+	padding-top:10px;
+}
+
+[ng-controller="CriteriaPickerCtrl"] .row:nth-child(odd) {
+	background-color:rgb(210, 255, 205);
 }
