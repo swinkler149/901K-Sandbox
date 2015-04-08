@@ -12,7 +12,7 @@ angular.module('c2App')
     // Initialize scope collections    
     $scope.cropData = [];
     $scope.emplData = [];
-    $scope.livestockData = [];
+    $scope.commodityData = [];
     $scope.cropLayerGroup = new L.LayerGroup();
 	
 	
@@ -97,11 +97,12 @@ angular.module('c2App')
 		  // Pane for showing relevant data
 		  var info = L.control({position: 'topright'});
 		  info.onAdd = function (map) {
-			pane = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			pane = L.DomUtil.create('div', 'info update-pane'); // create a div with a class "info"
 			pane.innerHTML += 'No State Selected'; // Initial text
 			return pane;
 		  };
 		  info.addTo(map);
+		  $('.update-pane').hide();
 		  
 		  var filterButton = L.control({position: 'topleft'});
 		  filterButton.onAdd = function (map) {
@@ -237,14 +238,15 @@ angular.module('c2App')
 			$scope.processor(emplData, "STATE", "TOT_EMP");
       });
 
-      //var livestockType = $('#livestock-picker').val();
-      $http.get('/api/livestock/').success(function(livestockData) {
-        $scope.livestockData = livestockData;
-                /*if($('#heatmap-empl-radios').is(':checked'))
-                        $scope.processor(emplData, "STATE", "TOT_EMP");*/
-		console.log(livestockData);
+      var commodityType = $('#commodity-picker').val();
+      $http.get('/api/livestock/').success(function(commodityData) {
+        $scope.commodityData = commodityData;
+                if($('#heatmap-commodity-radios').is(':checked'))
+                        $scope.processor(commodityData, "state_name", "Value");
+		console.log(commodityData);
       });
 
+		$('.update-pane').show();
 	  
 	  $scope.hideFilter();
     };
