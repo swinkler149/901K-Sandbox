@@ -13,6 +13,11 @@ angular.module('c2App')
     $http.get('/api/empl/distinct/OCC_TITLE').success(function(employmentTypeData) {
       $scope.employmentTypeData = employmentTypeData;
     });
+
+    $scope.commodityTypeData = [];
+    $http.get('/api/livestock/distinct/commodity_desc').success(function(commodityTypeData) {
+      $scope.commodityTypeData = commodityTypeData;
+    });
   });
   
   
