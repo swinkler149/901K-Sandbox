@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var _http = require('http');
 
 // Get list of livestocks
 exports.index = function(req, res) {
@@ -8,51 +9,54 @@ exports.index = function(req, res) {
   console.log('livestock.controller: Received: short_desc='+req.params.short_desc);
 
   //var shortDesc = escape("CHICKENS, (EXCL BROILERS) - INVENTORY");
-  var shortDesc = escape(req.params.short_desc);
+  var shortDesc = escape(req.params.commodity);
   var queryString = "key=354B12E1-8F85-36E4-8053-A62ECE5757E1&short_desc="+shortDesc+"&agg_level_desc=STATE&year=2014&format=JSON";
-  var fullCountURI = "http://quickstats.nass.usda.gov/api/get_counts/?"+queryString;
-  var fullQueryURI = "http://quickstats.nass.usda.gov/api/api_GET/?"+queryString;
-  jQuery.ajax({
-      url: fullCountURI,
-      type: "GET",
-      //data: JSON.stringify({"foo":"bar"}),
-      //dataType: "json",
-      //contentType: "application/json; charset=utf-8",
-      success: function (response) {
-        console.log("success");
-        console.log('livestock.controller: There are %d records matching the criteria', response.body);
-        return response.body;
-      },
-      error: function (response) {
-        console.log("failed");
-      }
+  var host = "quickstats.nass.usda.gov";
+  var cntpath = "/api/get_counts/?"+queryString;
+  var qrypath = "/api/api_GET/?"+queryString;
+  var http = require('http');
+
+  // See how many recs will bbe returned
+  var cntReq = http.get({host: host, path: cntpath}, function(cntResp) {
+    /*console.log('STATUS: ' + cntResp.statusCode);
+    console.log('HEADERS: ' + JSON.stringify(cntResp.headers));*/
+
+    // Buffer the body entirely for processing as a whole.
+    var bodyChunks = [];
+    cntResp.on('data', function(chunk) {
+      // You can process streamed parts here...
+      bodyChunks.push(chunk);
+    }).on('end', function() {
+      var body = Buffer.concat(bodyChunks);
+      //console.log('BODY: ' + body);
+
+      var jbody = JSON.parse(body);
+      console.log('livestock.controller: There are %d records matching the criteria', jbody.count);
+    })
   });
 
-  jQuery.ajax({
-      url: fullQueryURI,
-      type: "GET",
-      //data: JSON.stringify({"foo":"bar"}),
-      //dataType: "json",
-      //contentType: "application/json; charset=utf-8",
-      success: function (response) {
-        console.log("success");
-        return json(200, response.body);
-      },
-      error: function (response) {
-        console.log("failed");
-      }
-  });  
+  // Now perform the actual query
+  var qryReq = http.get({host: host, path: qrypath}, function(qryResp) {
+    /*console.log('STATUS: ' + qryResp.statusCode);
+    console.log('HEADERS: ' + JSON.stringify(qryResp.headers));*/
 
-  /*$http.get(fullQueryURI).success(function(livestockData) {
+    // Buffer the body entirely for processing as a whole.
+    var bodyChunks = [];
+    qryResp.on('data', function(chunk) {
+      // You can process streamed parts here...
+      bodyChunks.push(chunk);
+    }).on('end', function() {
+      var livestockData = Buffer.concat(bodyChunks);
+      //console.log('BODY: ' + body);
+      // ...and/or process the entire body here.
+      //console.log("retrieved data: " + livestockData);
+      return res.json(200, livestockData);
+    })
+  });
 
+/*  console.log('livestock.controller: There are %d records matching the criteria', data);
         console.log('retrieved data: ' + livestockData);
-        return res.json(200, livestockData);
-      });*/
-
-  /*Livestock.find(function (err, livestocks) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, livestocks);
-  });*/
+        return res.json(200, livestockData);*/
 };
 
 // Get list of distinct Commodity values

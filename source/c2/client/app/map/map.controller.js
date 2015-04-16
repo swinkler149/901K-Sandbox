@@ -239,11 +239,11 @@ angular.module('c2App')
       });
 
       var commodityType = $('#commodity-picker').val();
-      $http.get('/api/livestock/').success(function(commodityData) {
+      $http.get('/api/livestock/'+commodityType).success(function(commodityData) {
         $scope.commodityData = commodityData;
                 if($('#heatmap-commodity-radios').is(':checked'))
                         $scope.processor(commodityData, "state_name", "Value");
-		console.log(commodityData);
+		//console.log(commodityData);
       });
 
 		$('.update-pane').show();
