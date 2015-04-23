@@ -23,8 +23,7 @@ import java.util.Iterator;
 	        // declaration and instantiation of objects/variables
 
 	    	WebDriver driver = new FirefoxDriver();
-//			String baseUrl = http://54.175.60.221:3000/map	    	
-	    	String baseUrl = "http://72.196.217.141:3000/map";        //DELETE THIS BEFORE CHECKING IN AND REPLACE WITH ABOVE IP
+		String baseUrl = http://54.175.60.221:3000/map	    	
 
 /*
  * 			Corrolator-test-001  -- Bring up the Corrolator site  
